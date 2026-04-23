@@ -1,0 +1,87 @@
+
+"Header Keys Page-/my-data":{
+    "my_data": "My Data",
+    "jobs": "Jobs",
+    "companies": "Companies",
+    "fachzubi_de": "Fachzubi.de",
+
+},
+
+"Footer Keys Page-/my-data":{
+
+    "fachzubi_all rights_reserved": "2023, Fachzubi, All Rights Reserved",
+    "terms_conditions_privacy_policy": "Terms & Conditions   Privacy Policy",
+},
+
+
+"Home Page Front Content Page-/my-data":{
+
+    "welcome": "WELCOME",
+    "home_heading": "Land your dream job with Fachzubi",
+
+    "home_descri" : "Immerse yourself in a world full of professional opportunities and exciting career opportunities.
+      Discover renowned companies from your region with attractive internships, studies, specialist positions and training offers.
+       Get started! 🚀",
+},
+
+"Home Page Form Content Page-/my-data":{
+
+    "name/surname": "NAME/SURNAME (required)",
+    "e-mail" : "E-MAIL (required)",
+    "phone_number": "Phone Number",
+    "about_me": "About me (optional)",
+    "save_btn": "SAVE",
+},
+
+
+"Jobs Page (page-/jobs)":{
+
+    "job_title_keywords_company": "Job title, keywords or company",
+    "all_location": "All Location",
+    "search":  "Search",
+    "industry": "Industry",
+    "sort_by": "Sort By",
+    "a_z": "A to Z",
+    "z_a": "Z to A",
+},
+
+
+"Job Details Page  (page-/jobs/details)":{
+    "back": "Back",
+     "about_company": "About Company",
+     "job_title": "Job Title",
+     "your_tasks": "Your Tasks",
+     "we_wish": "We Wish",
+     "we_offer": "We Offer",
+     "job_description": "Job Description",
+     "address": "Address",
+     "get_direction":"Get Direction",
+     "apply_now_btn": "APPLY NOW",
+     "appointment_btn": "APPOINTMENT",
+},
+  
+
+  "Comapanies-List Page (page-company-list/details)":{
+  
+    "website": "Website",
+    "Phone_number": "Phone Number",
+    "jobs": "Jobs",
+  },
+
+  "Model of Apply for job and Appoinment button":{
+  
+    "apply_for_job": "Apply for the Job",
+    "name/surname": "Name/Surname",
+    "enter_your_name/surname":  "enter your name/surname",
+    "e-mail": "E-mail (required)",
+    "enter_your_e-mail": "enter your e-mail",
+    "phone_number":  "Phone Number",
+    "About_me": "About me (optional)",
+    "cover_letter":  "Cover Letter",
+    "apply_now":   "Apply Now",
+    "take_appointment": "Take Appointment",
+    "terms_conditions":  "Terms & Conditions",
+    "privacy_policy": "Privacy Policy",
+
+},
+  

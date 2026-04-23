@@ -1,0 +1,74 @@
+
+"Header Keys (Page-/my-data)": {
+    "my_data": "meine Daten",
+    "jobs": "Arbeitsplätze",
+    "companies": "Firmen",
+    "fachzubi_de": "Fachzubi.de",
+},
+
+"Footer Keys (Page-/my-data)":{
+    "fachzubi_all_rights_reserved": "2023, Fachzubi, Alle Rechte vorbehalten",
+    "terms_conditions_privacy_policy": "Allgemeine Geschäftsbedingungen und Datenschutzbestimmungen",
+},
+
+"Home Page Front Content (Page-/my-data)":{
+    "welcome": "WILLKOMMEN",
+    "home_heading": "Sichern Sie sich Ihren Traumjob bei Fachzubi",
+
+    "home_descri" : "Tauchen Sie ein in eine Welt voller beruflicher Möglichkeiten und spannender Karrieremöglichkeiten.
+     Entdecken Sie renommierte Unternehmen aus Ihrer Region mit attraktiven Praktikums-, Studien-, Fachstellen- und Ausbildungsangeboten.
+     Loslegen! 🚀",
+},
+
+"Home Page Form Content (Page-/my-data)":{
+    "name/surname": "VORNAME/NACHNAME (erforderlich)",
+    "e-mail" : "Email (erforderlich)",
+    "phone_number": "Telefonnummer",
+    "about_me": "Über mich (optional)",
+    "save": "SPEICHERN",
+},
+
+"Jobs Page (page-/jobs)":{
+    "Job_title_keywords_company": "Berufsbezeichnung, Schlüsselwörter oder Unternehmen",
+    "all_location": "Alle Standorte",
+    "search":  "Suchen",
+    "industry": "Industrie",
+    "sort_by": "Sortiere nach",
+    "a_z": "A bis Z",
+    "z_a": "Z bis A",
+},
+
+  "Job Details Page  (page-/jobs/details)" :{
+     "back":"Zurück",
+     "about_company": "Über das Unternehmen",
+     "job_title": "JBerufsbezeichnung",
+     "your_tasks": "Ihre Aufgaben",
+     "we_wish": "Wir wünschen",
+     "we_offer": "Wir bieten",
+     "job_description": "Arbeitsbeschreibung",
+     "address": "Adresse",
+     "apply_now_btn": "JETZT BEWERBEN",
+     "appointment_btn": "TERMIN",
+  },
+
+  
+  "Comapanies-List Page (page-company-list/details)":{
+    "website": "Webseite",
+    "phone_number": "Telefonnummer",
+    "jobs": "Arbeitsplätze",
+  },
+
+  "Model of Apply for job and Appoinment button":{
+    "Apply_for_Job": "Sich für den Job bewerben",
+    "name/surname": "TerminvereinBarung",
+    "enter_your_name/surname":  "Geben Sie Ihren Vor-/Nachnamen ein",
+    "e-mail": "Email (erforderlich)",
+    "enter_your_e-mail": "geben sie ihre E-Mail Adresse ein",
+    "phone_number":  "Telefonnummer",
+    "about_me": "Über mich (optional)",
+    "cover_letter":  "Motivationsschreiben",
+    "apply_now":   "Jetzt bewerben",
+    "take_appointment": "Nehmen Sie einen Termin an",
+    "terms_conditions":  "Terms & amp; Bedingungen",
+    "privacy_policy": "Datenschutzrichtlinie",
+  }
