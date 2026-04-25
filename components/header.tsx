@@ -14,15 +14,18 @@ import {
   ListItemText,
   Stack,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import Image from "next/image";
 import IMAGES from "@/public/images";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { SVG } from "./icon";
+import QrScanner from "./QrScanner";
 
 interface Props {
   /**
@@ -54,6 +57,7 @@ const Header = (props: Props) => {
   const pathname = usePathname();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [qrOpen, setQrOpen] = useState(false);
   const router = useRouter();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -119,6 +123,27 @@ const Header = (props: Props) => {
             </>
           );
         })}
+        {/* QR Scan button in mobile drawer */}
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={(e) => {
+              e.stopPropagation();
+              setQrOpen(true);
+            }}
+            sx={{ color: "#0096A4" }}
+          >
+            <QrCodeScannerIcon sx={{ mr: 1 }} />
+            <ListItemText
+              primary="QR scannen"
+              sx={{
+                "& .MuiTypography-root": {
+                  fontSize: "16px",
+                  fontWeight: "600",
+                },
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -186,7 +211,7 @@ const Header = (props: Props) => {
             <Stack
               direction={"row"}
               spacing={2}
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
             >
               {navItems.map((item) => {
                 if (item.name === "Datenschutz" || item.name === "Impressum") {
@@ -215,6 +240,33 @@ const Header = (props: Props) => {
                   </>
                 );
               })}
+              {/* QR Scan button - desktop */}
+              <Tooltip title="QR-Code scannen">
+                <IconButton
+                  onClick={() => setQrOpen(true)}
+                  sx={{
+                    color: "#0096A4",
+                    border: "1px solid #0096A4",
+                    borderRadius: "8px",
+                    padding: "6px 12px",
+                    "&:hover": {
+                      background: "#0096A4",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <QrCodeScannerIcon sx={{ mr: 0.5 }} />
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      textTransform: "none",
+                    }}
+                  >
+                    QR scannen
+                  </Typography>
+                </IconButton>
+              </Tooltip>
             </Stack>
           </Toolbar>
         </Container>
@@ -239,6 +291,8 @@ const Header = (props: Props) => {
           {drawer}
         </Drawer>
       </nav>
+      {/* QR Scanner Modal */}
+      <QrScanner open={qrOpen} onClose={() => setQrOpen(false)} />
     </>
   );
 };
