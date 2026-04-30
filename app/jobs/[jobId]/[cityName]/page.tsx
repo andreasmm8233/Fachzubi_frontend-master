@@ -46,7 +46,7 @@ const CityJobs = () => {
             spacing={2}
             alignItems={"center"}
             sx={{ mb: 3, cursor: "pointer", display: "inline-flex" }}
-            onClick={() => router.push("/jobs")}
+            onClick={() => router.back()}
           >
             <IconButton>
               <SVG.BackArrow />

@@ -43,12 +43,12 @@ const navItems = [
     name: "Meine Daten",
     url: "/",
   },
-  {
+  /* {
     id: 2,
     name: "Arbeitsplätze",
     url: "/jobs",
   },
-  { id: 3, name: "Firmen", url: "/company-list" },
+  { id: 3, name: "Firmen", url: "/company-list" }, */
   { id: 4, name: "Datenschutz", url: "terms-and-conditions" },
   { id: 5, name: "Impressum", url: "/privacy-policy" },
 ];
@@ -105,8 +105,8 @@ const Header = (props: Props) => {
                       pathname === item.url
                         ? "#0096A4"
                         : pathname?.includes(`${item.url}`)
-                        ? "#000"
-                        : null,
+                          ? "#000"
+                          : null,
                   }}
                 >
                   <ListItemText
@@ -242,30 +242,23 @@ const Header = (props: Props) => {
               })}
               {/* QR Scan button - desktop */}
               <Tooltip title="QR-Code scannen">
-                <IconButton
+                <Button
+                  variant="outlined"
                   onClick={() => setQrOpen(true)}
+                  startIcon={<QrCodeScannerIcon />}
                   sx={{
                     color: "#0096A4",
-                    border: "1px solid #0096A4",
-                    borderRadius: "8px",
-                    padding: "6px 12px",
+                    borderColor: "#0096A4",
+                    textTransform: "none",
                     "&:hover": {
                       background: "#0096A4",
                       color: "#fff",
+                      borderColor: "#0096A4",
                     },
                   }}
                 >
-                  <QrCodeScannerIcon sx={{ mr: 0.5 }} />
-                  <Typography
-                    sx={{
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      textTransform: "none",
-                    }}
-                  >
-                    QR scannen
-                  </Typography>
-                </IconButton>
+                  QR scannen
+                </Button>
               </Tooltip>
             </Stack>
           </Toolbar>

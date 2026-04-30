@@ -117,7 +117,7 @@ const Details = () => {
               spacing={2}
               alignItems={"center"}
               sx={{ mb: 2, cursor: "pointer", display: "inline-block" }}
-              onClick={() => router.push("/company-list")}
+              onClick={() => router.back()}
             >
               <IconButton>
                 <SVG.BackArrow />
