@@ -15,6 +15,7 @@ const nextConfig = {
       "digimonktech.com",
       "fachzubi-app.de",
       "api.fachzubi-app.de",
+      "api.webzlab.site",
     ],
   },
 };

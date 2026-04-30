@@ -270,6 +270,15 @@ const Details = () => {
                   {companyDetail &&
                     companyDetail.videoLink.map((data, index) => {
                       if (data) {
+                        let embedUrl = data;
+                        if (data.includes("youtube.com/watch?v=")) {
+                          embedUrl = data.replace("watch?v=", "embed/");
+                          embedUrl = embedUrl.split("&")[0];
+                        } else if (data.includes("youtu.be/")) {
+                          embedUrl = data.replace("youtu.be/", "youtube.com/embed/");
+                          embedUrl = embedUrl.split("?")[0];
+                        }
+
                         return (
                           <Box
                             sx={{
@@ -286,7 +295,7 @@ const Details = () => {
                             <iframe
                               width="516"
                               height="268"
-                              src={data}
+                              src={embedUrl}
                               allowFullScreen
                               style={{ border: "0px", borderRadius: "20px" }}
                             ></iframe>
