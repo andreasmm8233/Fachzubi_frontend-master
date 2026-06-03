@@ -46,12 +46,17 @@ export const getAllSuggestion = async (
 export const getJobDetailApi = async (
   payload: string
 ): Promise<SuccessResult<JobDetails> | ErrorResult> => {
+  const id = payload.replace(/-\d+$/, "");
   const response = await request({
-    url: `/job/${payload}`,
+    url: `/job/${id}`,
     method: "get",
   });
   if (response.remote === "success") {
-    response.data.data = transformJobDetail(response.data.data);
+    if (response.data.data && response.data.data.isCity) {
+      // Return city response directly without transformation
+    } else {
+      response.data.data = transformJobDetail(response.data.data);
+    }
   }
   return response;
 };

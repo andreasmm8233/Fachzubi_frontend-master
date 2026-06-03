@@ -46,7 +46,12 @@ const Details = () => {
         const response = await getJobDetailApi(id);
 
         if (response.remote === "success") {
-          setJobDetail(response.data.data);
+          const data = response.data.data;
+          if (data && (data as any).isCity) {
+            router.replace(`/jobs/${(data as any)._id}/${encodeURIComponent((data as any).cityName)}`);
+            return;
+          }
+          setJobDetail(data);
         }
         setIsLoading(false);
       } catch (error) {

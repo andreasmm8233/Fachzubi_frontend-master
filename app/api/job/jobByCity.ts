@@ -14,7 +14,7 @@ export const getJobsByCityApi = async (
   if (response.remote === "success") {
     const rawData = response.data.data;
     // Backend may return jobs in .jobs array or directly as an array
-    const jobsArray = rawData?.jobs ?? (Array.isArray(rawData) ? rawData : []);
+    const jobsArray = rawData?.jobs ?? rawData?.data ?? (Array.isArray(rawData) ? rawData : []);
     const transformedJobs = transformJobsData(jobsArray);
     response.data.data = {
       data: transformedJobs,
