@@ -243,17 +243,22 @@ const Header = (props: Props) => {
               {/* QR Scan button - desktop */}
               <Tooltip title="QR-Code scannen">
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   onClick={() => setQrOpen(true)}
                   startIcon={<QrCodeScannerIcon />}
                   sx={{
-                    color: "#0096A4",
-                    borderColor: "#0096A4",
                     textTransform: "none",
-                    "&:hover": {
-                      background: "#0096A4",
+                    "&.MuiButton-contained": {
+                      backgroundColor: "#16A34A",
                       color: "#fff",
-                      borderColor: "#0096A4",
+                      "&:hover": {
+                        backgroundColor: "#15803D",
+                        color: "#fff",
+                      },
+                    },
+                    "&:hover": {
+                      backgroundColor: "#15803D",
+                      color: "#fff",
                     },
                   }}
                 >
