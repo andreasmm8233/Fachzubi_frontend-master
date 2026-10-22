@@ -19,7 +19,6 @@ const CityJobs = () => {
   const router = useRouter();
   const params = useParams();
   const cityId = params.jobId as string;
-  const cityName = decodeURIComponent(params.cityName as string);
 
   const [jobList, setJobList] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,18 +52,6 @@ const CityJobs = () => {
             </IconButton>
             <span>Zurück</span>
           </Stack>
-
-          <Typography
-            variant="h4"
-            sx={{
-              color: "#0096A4",
-              fontWeight: 600,
-              mb: 3,
-              fontSize: { xs: "22px", sm: "28px" },
-            }}
-          >
-            Jobs in {cityName}
-          </Typography>
 
           {/* Job Count */}
           <Box
@@ -108,7 +95,7 @@ const CityJobs = () => {
           {!isLoading && jobList.length === 0 && (
             <Box sx={{ textAlign: "center", mt: 4 }}>
               <Typography sx={{ color: "#646464", fontSize: "18px" }}>
-                Keine Jobs in {cityName} gefunden
+                Keine Jobs gefunden
               </Typography>
             </Box>
           )}

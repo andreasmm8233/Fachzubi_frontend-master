@@ -37,7 +37,10 @@ export const transformJobDetail = (jobData: any): JobDetails => {
     isStartDate = true;
   }
   return {
-    jobTypeName: jobData.jobTypeName,
+    jobTypeName: (Array.isArray(jobData.jobTypeName)
+      ? jobData.jobTypeName
+      : [jobData.jobTypeName]
+    ).filter(Boolean),
     phoneNo: jobData.company.phoneNo || "",
     id: jobData._id,
     videoLink: jobData.videoLink,

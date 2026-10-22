@@ -93,7 +93,7 @@ export interface JobDetails {
   attachments: Attachement[];
   createdAt: string;
   phoneNo?: string;
-  jobTypeName?: string;
+  jobTypeName?: string[];
 }
 
 export interface JobApplicationPayload {
