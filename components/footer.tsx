@@ -15,7 +15,7 @@ const MainFooter = () => {
             justifyContent={{ xs: "flex-start", lg: "space-between" }}
             sx={{ fontSize: "16px", fontWeight: 600, color: "#fff" }}
           >
-            <Box> 2023, Fachzubi, Alle Rechte vorbehalten</Box>
+            <Box>Fachzubi | Alle Rechte vorbehalten.</Box>
             <Stack direction={"row"} spacing={2}>
               <Link href="/terms-and-conditions">Datenschutz</Link>
               <Link href="/privacy-policy">Impressum</Link>

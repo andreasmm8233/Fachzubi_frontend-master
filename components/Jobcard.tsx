@@ -15,7 +15,6 @@ import { SVG } from "./icon";
 import IModal from "./modal";
 import { useEffect, useState } from "react";
 import ApplyJobs from "@/app/jobs/[jobId]/applyJobs";
-import Appointment from "../app/jobs/[jobId]/appoinment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
@@ -23,10 +22,8 @@ import IMAGES from "@/public/images";
 
 const JobCard = (props: any) => {
   const [applyJobs, setApplyJobs] = useState<boolean>(false);
-  const [appointment, setAppointment] = useState<boolean>(false);
   const handleClose = () => {
     setApplyJobs(false);
-    setAppointment(false);
   };
   return (
     <Card
@@ -176,15 +173,6 @@ const JobCard = (props: any) => {
                 <SVG.message />
               </IconButton>
             </Tooltip>
-            <Tooltip title={"Termin vereinbaren"}>
-              <IconButton
-                disableRipple={true}
-                sx={{ padding: "0px" }}
-                onClick={() => setAppointment(true)}
-              >
-                <SVG.Edit />
-              </IconButton>
-            </Tooltip>
             <Avatar
               component={Link}
               href={props.url}
@@ -208,13 +196,6 @@ const JobCard = (props: any) => {
         <ApplyJobs
           handleClose={handleClose}
           jobId={props.item.id}
-          toast={toast}
-        />
-      </IModal>
-      <IModal open={appointment} handleClose={handleClose}>
-        <Appointment
-          handleClose={handleClose}
-          companyId={props.item.companyId}
           toast={toast}
         />
       </IModal>

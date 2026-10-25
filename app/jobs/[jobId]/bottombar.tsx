@@ -6,7 +6,6 @@ import ApplyJobs from "./applyJobs";
 
 import { useState } from "react";
 import IModal from "@/components/modal";
-import Appoinment from "./appoinment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { City } from "@/app/api/job/jobs.types";
@@ -20,16 +19,11 @@ const BottomBar = ({
   companyId?: string;
 }) => {
   const [applyJobs, setApplyJobs] = useState<boolean>(false);
-  const [appoinment, setAppoinment] = useState<boolean>(false);
   const handleApplyJobs = () => {
     setApplyJobs(true);
   };
-  const handleAppoiment = () => {
-    setAppoinment(true);
-  };
   const handleClose = () => {
     setApplyJobs(false);
-    setAppoinment(false);
   };
   return (
     <>
@@ -86,33 +80,11 @@ const BottomBar = ({
             >
               JETZT BEWERBEN
             </Button>
-            <Button
-              onClick={() => handleAppoiment()}
-              sx={{
-                color: "#fff",
-                fontSize: "20px",
-                border: "1px solid #fff",
-                px: 3,
-                "@media (max-width:992px)": {
-                  width: "100%",
-                  marginBottom: "15px",
-                },
-              }}
-            >
-              TERMIN Vereinbaren
-            </Button>
           </Stack>
         </Container>
       </Box>
       <IModal open={applyJobs} handleClose={handleClose}>
         <ApplyJobs handleClose={handleClose} jobId={jobId} toast={toast} />
-      </IModal>
-      <IModal open={appoinment} handleClose={handleClose}>
-        <Appoinment
-          handleClose={handleClose}
-          companyId={companyId}
-          toast={toast}
-        />
       </IModal>
       <ToastContainer />
     </>
