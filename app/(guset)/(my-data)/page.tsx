@@ -7,23 +7,19 @@ import {
   Card,
   CardContent,
   Grid,
+  InputAdornment,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useRouter } from "next/navigation";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { getAllContents } from "@/app/api/content/landing.page";
 import { getCity } from "@/app/api/cities/city";
 import { TransformCity } from "@/app/api/cities/city.types";
-
-const slugifyCity = (name: string) =>
-  name
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "");
+import { ADMIN_URL } from "@/components/adminUrl";
 
 const Home = () => {
   const [heading, setHeading] = useState("");
@@ -31,7 +27,6 @@ const Home = () => {
   const [bottomBarText, setBottomBarText] = useState("");
   const [content, setContent] = useState("");
   const [loading, setIsLoading] = useState(true);
-  const router = useRouter();
   const [cities, setCities] = useState<TransformCity[]>([]);
   const [selectedCity, setSelectedCity] = useState<TransformCity | null>(null);
   const [cityError, setCityError] = useState(false);
@@ -41,9 +36,10 @@ const Home = () => {
       setCityError(true);
       return;
     }
-    router.push(
-      `/jobs/${encodeURIComponent(selectedCity.id)}/${slugifyCity(selectedCity.name)}`
-    );
+    // Companies listing in the admin app, with this city preselected.
+    window.location.href = `${ADMIN_URL}/companies?city=${encodeURIComponent(
+      selectedCity.id
+    )}`;
   };
 
   const handleGetAllContent = async () => {
@@ -81,7 +77,7 @@ const Home = () => {
         "@media (max-width:992px)": { padding: "30px 0px 25px" },
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={{ xs: 4, lg: 6 }} alignItems="center">
         <Grid item xs={12} lg={6}>
           <>
             <Typography
@@ -104,7 +100,7 @@ const Home = () => {
                     }}
                   />
                 </>
-              ) : (
+              ) : loading ? null : (
                 "WILLKOMMEN"
               )}
             </Typography>
@@ -128,7 +124,7 @@ const Home = () => {
                     }}
                   />
                 </Box>
-              ) : (
+              ) : loading ? null : (
                 <>
                   Finde deinen Traumjob mit{" "}
                   <Box component={"span"} sx={{ color: "#F1841D" }}>
@@ -160,7 +156,7 @@ const Home = () => {
                     }}
                   />
                 </>
-              ) : (
+              ) : loading ? null : (
                 <>
                   Tauchen Sie ein in eine Welt voller beruflicher Möglichkeiten
                   und spannender Karrierechancen. Entdecken Sie renommierte
@@ -176,12 +172,40 @@ const Home = () => {
           <Card
             elevation={0}
             sx={{
-              boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.10)",
-              borderRadius: "20px",
+              maxWidth: 520,
+              mx: "auto",
+              boxShadow: "0px 8px 32px 0px rgba(0, 0, 0, 0.10)",
+              borderRadius: "16px",
+              borderTop: "6px solid #0096A4",
             }}
           >
-            <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
-              <Stack direction={"column"} spacing={2}>
+            <CardContent sx={{ p: { xs: 3, sm: 4 }, "&:last-child": { pb: { xs: 3, sm: 4 } } }}>
+              <Stack direction={"column"} spacing={3}>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Box
+                    sx={{
+                      width: 52,
+                      height: 52,
+                      flexShrink: 0,
+                      borderRadius: "12px",
+                      backgroundColor: "rgba(0,150,164,0.1)",
+                      color: "#0096A4",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <LocationOnIcon sx={{ fontSize: "30px" }} />
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontSize: { xs: "20px", sm: "22px" }, fontWeight: 700, color: "#2d3748", lineHeight: 1.3 }}>
+                      Clever informieren in deiner UniStadt!
+                    </Typography>
+                    <Typography sx={{ fontSize: "14px", color: "#718096", mt: 0.5 }}>
+                      Wähle deine Stadt und entdecke die Unternehmen dort.
+                    </Typography>
+                  </Box>
+                </Stack>
                 <Autocomplete
                   options={cities}
                   value={selectedCity}
@@ -196,21 +220,44 @@ const Home = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      placeholder="STADT AUSWÄHLEN (A–Z)"
+                      placeholder="Stadt auswählen (A–Z)"
                       error={cityError}
                       helperText={cityError ? "Bitte wähle eine Stadt aus" : ""}
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <>
+                            <InputAdornment position="start">
+                              <SearchIcon sx={{ color: "#0096A4" }} />
+                            </InputAdornment>
+                            {params.InputProps.startAdornment}
+                          </>
+                        ),
+                      }}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          minHeight: "58px",
+                          fontSize: "16px",
+                          borderRadius: "10px",
+                        },
+                      }}
                     />
                   )}
                 />
                 <Button
                   variant="contained"
+                  fullWidth
                   onClick={handleSearch}
-                  endIcon={<ArrowForwardIcon sx={{ fontSize: "40px !important" }} />}
+                  endIcon={<ArrowForwardIcon sx={{ fontSize: "32px !important" }} />}
                   sx={{
-                    fontSize: "28px",
+                    minHeight: "60px",
+                    fontSize: "22px",
                     fontWeight: "700",
+                    letterSpacing: "1px",
+                    borderRadius: "10px",
                     textTransform: "uppercase",
-                    "@media (max-width: 480px)": { fontSize: "22px" },
+                    boxShadow: "0 6px 16px rgba(241,132,29,0.35)",
+                    "@media (max-width: 480px)": { fontSize: "18px" },
                   }}
                 >
                   Suche starten

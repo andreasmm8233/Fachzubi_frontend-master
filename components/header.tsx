@@ -26,6 +26,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { SVG } from "./icon";
 import QrScanner from "./QrScanner";
+import { ADMIN_URL } from "./adminUrl";
 
 interface Props {
   /**
@@ -36,10 +37,6 @@ interface Props {
 }
 
 const drawerWidth = 240;
-// The public companies/jobs listings live in the admin app.
-const ADMIN_URL = (
-  process.env.NEXT_PUBLIC_ADMIN_URL || "https://admin.unibonus.app"
-).replace(/\/+$/, "");
 // const navItems = ["My Data", "Jobs", "Companies"];
 const navItems = [
   {
