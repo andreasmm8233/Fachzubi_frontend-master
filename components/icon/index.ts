@@ -10,7 +10,6 @@ import File from "./file.svg";
 import Direction from "./dir.svg";
 import EditIcon from "./edit-d.svg";
 import user from "./user.svg";
-import logo from "./Fachzubi.de.svg";
 import phone from "./phone.svg";
 import email from "./mail.svg";
 import company from "./building.svg";
@@ -28,7 +27,6 @@ export const SVG = {
   Direction,
   EditIcon,
   user,
-  logo,
   phone,
   email,
   company,

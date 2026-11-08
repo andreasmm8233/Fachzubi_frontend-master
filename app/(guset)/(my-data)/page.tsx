@@ -128,13 +128,9 @@ const Home = () => {
                 <>
                   Finde deinen Traumjob mit{" "}
                   <Box component={"span"} sx={{ color: "#F1841D" }}>
-                    F
+                    Uni
                     <Box component={"span"} sx={{ color: "#0096A4" }}>
-                      a
-                    </Box>
-                    ch
-                    <Box component={"span"} sx={{ color: "#0096A4" }}>
-                      zubi
+                      Bonus
                     </Box>
                   </Box>
                 </>

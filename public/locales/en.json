@@ -3,13 +3,13 @@
     "my_data": "My Data",
     "jobs": "Jobs",
     "companies": "Companies",
-    "fachzubi_de": "Fachzubi.de",
+    "unibonus_app": "unibonus.app",
 
 },
 
 "Footer Keys Page-/my-data":{
 
-    "fachzubi_all rights_reserved": "2023, Fachzubi, All Rights Reserved",
+    "unibonus_all_rights_reserved": "2023, UniBonus, All Rights Reserved",
     "terms_conditions_privacy_policy": "Terms & Conditions   Privacy Policy",
 },
 
@@ -17,7 +17,7 @@
 "Home Page Front Content Page-/my-data":{
 
     "welcome": "WELCOME",
-    "home_heading": "Land your dream job with Fachzubi",
+    "home_heading": "Land your dream job with UniBonus",
 
     "home_descri" : "Immerse yourself in a world full of professional opportunities and exciting career opportunities.
       Discover renowned companies from your region with attractive internships, studies, specialist positions and training offers.
