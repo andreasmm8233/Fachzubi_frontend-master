@@ -36,13 +36,19 @@ interface Props {
 }
 
 const drawerWidth = 240;
+// The public companies/jobs listings live in the admin app.
+const ADMIN_URL = (
+  process.env.NEXT_PUBLIC_ADMIN_URL || "https://admin.unibonus.app"
+).replace(/\/+$/, "");
 // const navItems = ["My Data", "Jobs", "Companies"];
 const navItems = [
   {
     id: 1,
-    name: "STARTSEITE",
+    name: "Meine Daten | STARTSEITE",
     url: "/",
   },
+  { id: 6, name: "Unternehmen", url: `${ADMIN_URL}/companies` },
+  { id: 7, name: "Jobs", url: `${ADMIN_URL}/jobs` },
   /* {
     id: 2,
     name: "Arbeitsplätze",

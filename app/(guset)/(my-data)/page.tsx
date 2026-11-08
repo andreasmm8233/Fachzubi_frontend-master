@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Autocomplete,
   Box,
   Button,
   Card,
@@ -10,38 +11,40 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllContents } from "@/app/api/content/landing.page";
+import { getCity } from "@/app/api/cities/city";
+import { TransformCity } from "@/app/api/cities/city.types";
+
+const slugifyCity = (name: string) =>
+  name
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+
 const Home = () => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const [bottomBarText, setBottomBarText] = useState("");
   const [content, setContent] = useState("");
   const [loading, setIsLoading] = useState(true);
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name ist erforderlich"),
-    email: Yup.string()
-      .email("Ungültige E-Mail")
-      .required("E-Mail ist erforderlich"),
-    phoneNo: Yup.string(),
-  });
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      phoneNo: "",
-      aboutMe: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      localStorage.setItem("UserData", JSON.stringify(values));
-      toast.info("Gerettet...");
-    },
-  });
+  const router = useRouter();
+  const [cities, setCities] = useState<TransformCity[]>([]);
+  const [selectedCity, setSelectedCity] = useState<TransformCity | null>(null);
+  const [cityError, setCityError] = useState(false);
+
+  const handleSearch = () => {
+    if (!selectedCity) {
+      setCityError(true);
+      return;
+    }
+    router.push(
+      `/jobs/${encodeURIComponent(selectedCity.id)}/${slugifyCity(selectedCity.name)}`
+    );
+  };
 
   const handleGetAllContent = async () => {
     setIsLoading(true);
@@ -55,16 +58,17 @@ const Home = () => {
   };
 
   useEffect(() => {
-    let userData: any = localStorage.getItem("UserData");
-    if (userData) {
-      userData = JSON.parse(userData);
-      formik.setFieldValue("name", userData.name);
-      formik.setFieldValue("email", userData.email);
-      formik.setFieldValue("phoneNo", userData.phoneNo);
-      if (userData.aboutMe) {
-        formik.setFieldValue("aboutMe", userData.aboutMe);
+    const loadCities = async () => {
+      const response = await getCity();
+      if (response.remote === "success") {
+        setCities(
+          [...response.data.data].sort((a, b) =>
+            a.name.localeCompare(b.name, "de", { sensitivity: "base" })
+          )
+        );
       }
-    }
+    };
+    loadCities();
   }, []);
 
   useEffect(() => {
@@ -176,69 +180,46 @@ const Home = () => {
               borderRadius: "20px",
             }}
           >
-            <CardContent sx={{ "&:last-child": { pb: 2 } }}>
+            <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
               <Stack direction={"column"} spacing={2}>
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  placeholder="VORNAME/NACHNAME (erforderlich)"
-                  fullWidth
-                  type="text"
-                  {...formik.getFieldProps("name")}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <div style={{ color: "red" }}>{formik.errors.name}</div>
-                )}
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  placeholder="E-MAIL (erforderlich)"
-                  fullWidth
-                  type="email"
-                  {...formik.getFieldProps("email")}
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <div style={{ color: "red" }}>{formik.errors.email}</div>
-                )}
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  placeholder="Telefonnummer"
-                  fullWidth
-                  type="number"
-                  {...formik.getFieldProps("phoneNo")}
-                />
-                {formik.touched.phoneNo && formik.errors.phoneNo && (
-                  <div style={{ color: "red" }}>{formik.errors.phoneNo}</div>
-                )}
-                <textarea
-                  style={{
-                    borderRadius: "10px",
-                    padding: "26.5px 14px",
-                    border: "1px solid #0096A4",
-                    resize: "none",
-                    height: "150px",
-                    fontFamily: `'Poppins', sans-serif`,
-                    outline: "none",
+                <Autocomplete
+                  options={cities}
+                  value={selectedCity}
+                  onChange={(_, city) => {
+                    setSelectedCity(city);
+                    setCityError(false);
                   }}
-                  {...formik.getFieldProps("aboutMe")}
-                  placeholder="Über mich (freiwilliges Feld)"
-                ></textarea>
+                  getOptionLabel={(city) => city.name}
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
+                  noOptionsText="Keine Stadt gefunden"
+                  fullWidth
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="STADT AUSWÄHLEN (A–Z)"
+                      error={cityError}
+                      helperText={cityError ? "Bitte wähle eine Stadt aus" : ""}
+                    />
+                  )}
+                />
                 <Button
                   variant="contained"
-                  sx={{ fontSize: "32px", fontWeight: "700" }}
-                  onClick={() => {
-                    formik.handleSubmit();
+                  onClick={handleSearch}
+                  endIcon={<ArrowForwardIcon sx={{ fontSize: "40px !important" }} />}
+                  sx={{
+                    fontSize: "28px",
+                    fontWeight: "700",
+                    textTransform: "uppercase",
+                    "@media (max-width: 480px)": { fontSize: "22px" },
                   }}
                 >
-                  Speichern
+                  Suche starten
                 </Button>
               </Stack>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      <ToastContainer />
     </Box>
   );
 };
