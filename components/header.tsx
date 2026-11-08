@@ -40,7 +40,7 @@ const drawerWidth = 240;
 const navItems = [
   {
     id: 1,
-    name: "Meine Daten",
+    name: "STARTSEITE",
     url: "/",
   },
   /* {
