@@ -26,7 +26,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { SVG } from "./icon";
 import QrScanner from "./QrScanner";
-import { ADMIN_URL } from "./adminUrl";
 
 interface Props {
   /**
@@ -39,13 +38,9 @@ interface Props {
 const drawerWidth = 240;
 // const navItems = ["My Data", "Jobs", "Companies"];
 const navItems = [
-  {
-    id: 1,
-    name: "Meine Daten | STARTSEITE",
-    url: "/",
-  },
-  { id: 6, name: "Unternehmen", url: `${ADMIN_URL}/companies` },
-  { id: 7, name: "Jobs", url: `${ADMIN_URL}/jobs` },
+  { id: 1, name: "STARTSEITE", url: "/" },
+  { id: 6, name: "Unternehmen", url: "/unternehmen" },
+  { id: 7, name: "Jobs", url: "/stellen" },
   /* {
     id: 2,
     name: "Arbeitsplätze",
@@ -90,39 +85,37 @@ const Header = (props: Props) => {
           router.push("/");
         }}
       >
-        <Image alt="UniBonus" src={IMAGES.Logo} width={174} height={48} />
+        <Image alt="UniBonus" src={IMAGES.Logo} width={176} height={60} />
       </Typography>
 
       <Divider />
       <List>
         {navItems.map((item) => {
           return (
-            <>
-              <ListItem key={item.id} disablePadding>
-                <ListItemButton
-                  LinkComponent={Link}
-                  href={item.url}
+            <ListItem key={item.id} disablePadding>
+              <ListItemButton
+                LinkComponent={Link}
+                href={item.url}
+                sx={{
+                  color:
+                    pathname === item.url
+                      ? "#0096A4"
+                      : pathname?.includes(`${item.url}`)
+                        ? "#000"
+                        : null,
+                }}
+              >
+                <ListItemText
+                  primary={item.name}
                   sx={{
-                    color:
-                      pathname === item.url
-                        ? "#0096A4"
-                        : pathname?.includes(`${item.url}`)
-                          ? "#000"
-                          : null,
+                    "& .MuiTypography-root": {
+                      fontSize: "16px",
+                      fontWeight: "600",
+                    },
                   }}
-                >
-                  <ListItemText
-                    primary={item.name}
-                    sx={{
-                      "& .MuiTypography-root": {
-                        fontSize: "16px",
-                        fontWeight: "600",
-                      },
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </>
+                />
+              </ListItemButton>
+            </ListItem>
           );
         })}
         {/* QR Scan button in mobile drawer */}
@@ -153,7 +146,11 @@ const Header = (props: Props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   useEffect(() => {
-    if (pathname.includes("/jobs")) {
+    if (pathname.startsWith("/unternehmen")) {
+      setHightLightPath("/unternehmen");
+    } else if (pathname.startsWith("/stellen")) {
+      setHightLightPath("/stellen");
+    } else if (pathname.includes("/jobs")) {
       setHightLightPath("/jobs");
     } else if (pathname.includes("/company-list")) {
       setHightLightPath("/company-list");
@@ -168,98 +165,88 @@ const Header = (props: Props) => {
         elevation={0}
         component="nav"
         sx={{
-          background: "#FFF8F8",
-          boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-          color: "#000",
-          padding: "15px 0px",
+          backgroundColor: "rgba(255,255,255,0.92)",
+          backdropFilter: "blur(10px)",
+          borderBottom: "1px solid #edf2f7",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+          color: "#2d3748",
           "&.MuiPaper-root": { paddingRight: "0px !important" },
         }}
       >
         <Container>
-          <Toolbar sx={{ padding: "0px !important" }}>
+          {/* 90px tall: the page content is offset by the same amount */}
+          <Toolbar sx={{ padding: "0px !important", minHeight: "90px !important" }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              sx={{ mr: 1, display: { sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                cursor: "pointer",
-                "& svg": {
-                  width: "272px",
-                  height: "36px",
-                },
-                "@media (max-width: 480px)": {
-                  "& svg": {
-                    width: "auto",
-                    height: "auto",
-                  },
-                },
-              }}
+            <Box
+              sx={{ flexGrow: 1, display: "flex", alignItems: "center", cursor: "pointer" }}
               onClick={() => {
                 router.push("/");
               }}
             >
-              <Image alt="UniBonus" src={IMAGES.Logo} width={174} height={48} />
-            </Typography>
+              <Image alt="UniBonus" src={IMAGES.Logo} width={176} height={60} priority />
+            </Box>
             <Stack
               direction={"row"}
-              spacing={2}
+              spacing={1}
               sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
             >
               {navItems.map((item) => {
                 if (item.name === "Datenschutz" || item.name === "Impressum") {
-                  return;
+                  return null;
                 }
+                const active = item.url === hightLightPath;
                 return (
-                  <>
-                    <Button
-                      LinkComponent={Link}
-                      href={item.url}
-                      key={item.id}
-                      variant="outlined"
-                      sx={{
-                        "&.MuiButton-outlined": {
-                          background:
-                            item.url === hightLightPath ? "#0096A4" : null,
-                          color: item.url === hightLightPath ? "#fff" : null,
-                          "&:hover": {
-                            color: "#0096A4",
-                          },
-                        },
-                      }}
-                    >
-                      {item.name}
-                    </Button>
-                  </>
+                  <Button
+                    LinkComponent={Link}
+                    href={item.url}
+                    key={item.id}
+                    sx={{
+                      textTransform: "none",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                      px: 2,
+                      py: 0.75,
+                      minWidth: 0,
+                      borderRadius: "6px",
+                      color: active ? "#0096A4" : "#4a5568",
+                      backgroundColor: active ? "rgba(0,150,164,0.1)" : "transparent",
+                      "&:hover": {
+                        backgroundColor: "rgba(0,150,164,0.08)",
+                        color: "#0096A4",
+                      },
+                    }}
+                  >
+                    {item.name}
+                  </Button>
                 );
               })}
               {/* QR Scan button - desktop */}
               <Tooltip title="QR-Code scannen">
                 <Button
                   variant="contained"
+                  disableElevation
                   onClick={() => setQrOpen(true)}
-                  startIcon={<QrCodeScannerIcon />}
+                  startIcon={<QrCodeScannerIcon sx={{ fontSize: "18px !important" }} />}
                   sx={{
                     textTransform: "none",
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    px: 2,
+                    py: 0.75,
+                    ml: "8px !important",
+                    borderRadius: "6px",
                     "&.MuiButton-contained": {
-                      backgroundColor: "#16A34A",
+                      backgroundColor: "#F1841D",
                       color: "#fff",
-                      "&:hover": {
-                        backgroundColor: "#15803D",
-                        color: "#fff",
-                      },
-                    },
-                    "&:hover": {
-                      backgroundColor: "#15803D",
-                      color: "#fff",
+                      "&:hover": { backgroundColor: "#d9720f", color: "#fff" },
                     },
                   }}
                 >
