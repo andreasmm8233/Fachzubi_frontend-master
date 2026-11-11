@@ -34,19 +34,20 @@ const TermsConditions = () => {
         sx={{
           color: "#0096A4",
           pb: 3,
+          fontSize: "20px",
           "@media(max-width:992px)": {
-            fontSize: "24px",
+            fontSize: "12px",
           },
         }}
       >
-        Terms & Bedingungen
+        Datenschutz & AGB
       </Typography>
       <Stack
         direction={"column"}
         spacing={2}
         sx={{
           "& .MuiTypography-root": {
-            fontSize: "20px",
+            fontSize: "10px",
             lineHeight: "normal",
             letterSpacing: "1px",
             fontWeight: "400",
@@ -60,12 +61,12 @@ const TermsConditions = () => {
             "& ul": { listStyle: "none", wordBreak: "break-all" },
             "@media(max-width:992px)": {
               "& h3": {
-                fontSize: "18px",
+                fontSize: "9px",
               },
             },
           }}
         >
-          {manageContent?.privacyPolicy && (
+          {manageContent?.termsConditions && (
             <div
               dangerouslySetInnerHTML={{
                 __html: manageContent.termsConditions ?? "",

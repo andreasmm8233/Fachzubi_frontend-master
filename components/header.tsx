@@ -38,7 +38,7 @@ interface Props {
 const drawerWidth = 240;
 // const navItems = ["My Data", "Jobs", "Companies"];
 const navItems = [
-  { id: 1, name: "STARTSEITE", url: "/" },
+  { id: 1, name: "Startseite", url: "/" },
   { id: 6, name: "Unternehmen", url: "/unternehmen" },
   { id: 7, name: "Jobs", url: "/stellen" },
   /* {
@@ -47,8 +47,8 @@ const navItems = [
     url: "/jobs",
   },
   { id: 3, name: "Firmen", url: "/company-list" }, */
-  { id: 4, name: "Datenschutz", url: "terms-and-conditions" },
-  { id: 5, name: "Impressum", url: "/privacy-policy" },
+  { id: 4, name: "Datenschutz", url: "/datenschutz-agb" },
+  { id: 5, name: "Impressum", url: "/impressum" },
 ];
 const Header = (props: Props) => {
   const [hightLightPath, setHightLightPath] = useState("");

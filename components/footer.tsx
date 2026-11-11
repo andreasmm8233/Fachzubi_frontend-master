@@ -17,8 +17,10 @@ const MainFooter = () => {
           >
             <Box>UniBonus | Alle Rechte vorbehalten.</Box>
             <Stack direction={"row"} spacing={2}>
-              <Link href="/terms-and-conditions">Datenschutz</Link>
-              <Link href="/privacy-policy">Impressum</Link>
+              <Link href="/datenschutz-agb">Datenschutz</Link>
+              <Link href="/impressum">Impressum</Link>
+              <Link href="/preise">Preise</Link>
+              <Link href="/kontakt">Kontakt</Link>
             </Stack>
           </Stack>
         </Container>

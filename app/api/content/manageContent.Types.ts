@@ -12,5 +12,14 @@ export interface ManageContentTypes {
   companiesSubHeading?: string;
   jobsHeading?: string;
   jobsSubHeading?: string;
+  contactHeading?: string;
+  contactDescription?: string;
+  contactCardTitle?: string;
+  contactPhone?: string;
+  contactTiming?: string;
+  contactEmail?: string;
+  contactFormText?: string;
+  pricingHeading?: string;
+  pricingDescription?: string;
   id: string;
 }
