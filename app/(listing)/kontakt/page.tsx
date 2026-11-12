@@ -20,6 +20,16 @@ import { sendContactQuery } from "@/app/api/contact/contact";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// German number in international format for the tel: link:
+// "0761 - 55 77 55 66" -> "+4976155775566", "0049 761 …" -> "+49761…", "+49 761 …" stays
+const toInternationalPhone = (phone: string) => {
+  const digits = phone.replace(/[^\d+]/g, "");
+  if (digits.startsWith("+")) return digits;
+  if (digits.startsWith("00")) return `+${digits.slice(2)}`;
+  if (digits.startsWith("0")) return `+49${digits.slice(1)}`;
+  return `+49${digits}`;
+};
+
 const EMPTY_FORM = { companyName: "", email: "", phoneNo: "", description: "" };
 type FormValues = typeof EMPTY_FORM;
 
@@ -121,7 +131,7 @@ export default function ContactPage() {
               {content.contactPhone && (
                 // tel: link, so a tap opens the phone's dial pad with the number filled in
                 <MuiLink
-                  href={`tel:${content.contactPhone.replace(/[^\d+]/g, "")}`}
+                  href={`tel:${toInternationalPhone(content.contactPhone)}`}
                   underline="none"
                   aria-label={`Anrufen: ${content.contactPhone}`}
                   sx={{
