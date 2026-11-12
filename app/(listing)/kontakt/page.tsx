@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Checkbox,
   Box,
   Button,
   CircularProgress,
@@ -33,6 +34,7 @@ export default function ContactPage() {
   const [values, setValues] = useState<FormValues>(EMPTY_FORM);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [sending, setSending] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"success" | "error" | null>(null);
 
   useEffect(() => {
@@ -70,6 +72,7 @@ export default function ContactPage() {
     setSending(false);
     if (response.remote === "success") {
       setValues(EMPTY_FORM);
+      setConsent(false);
       setStatus("success");
     } else {
       setStatus("error");
@@ -116,10 +119,18 @@ export default function ContactPage() {
                 {text(content.contactCardTitle, "Team kontaktieren")}
               </Typography>
               {content.contactPhone && (
+                // tel: link, so a tap opens the phone's dial pad with the number filled in
                 <MuiLink
                   href={`tel:${content.contactPhone.replace(/[^\d+]/g, "")}`}
-                  underline="hover"
-                  sx={{ display: "block", fontWeight: 800, fontSize: { xs: "22px", md: "26px" }, color: "#1a202c" }}
+                  underline="none"
+                  aria-label={`Anrufen: ${content.contactPhone}`}
+                  sx={{
+                    display: "inline-block",
+                    fontWeight: 800,
+                    fontSize: { xs: "22px", md: "26px" },
+                    color: "#0096A4",
+                    "&:hover": { color: "#F1841D" },
+                  }}
                 >
                   {content.contactPhone}
                 </MuiLink>
@@ -187,6 +198,14 @@ export default function ContactPage() {
                 </Typography>
                 <TextField id="contact-description" fullWidth multiline minRows={4} value={values.description} onChange={setField("description")} sx={fieldSx} />
               </Box>
+              {/* Consent checkbox: „Absenden" stays disabled until it is ticked */}
+              <Box component="label" htmlFor="contact-consent" sx={{ display: "flex", alignItems: "flex-start", gap: 0.5, cursor: "pointer" }}>
+                <Checkbox
+                  id="contact-consent"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  sx={{ p: 0.5, mt: "-2px", color: "#a0aec0", "&.Mui-checked": { color: "#0096A4" } }}
+                />
               <Typography
                 component="div"
                 sx={{ fontSize: "12px", color: "#718096", lineHeight: 1.6, "& p": { m: 0 }, "& a": { color: "#0096A4" } }}
@@ -197,12 +216,13 @@ export default function ContactPage() {
                   ),
                 }}
               />
+              </Box>
               <Box sx={{ textAlign: "right" }}>
                 <Button
                   type="submit"
                   variant="contained"
                   disableElevation
-                  disabled={sending}
+                  disabled={sending || !consent}
                   sx={{
                     textTransform: "none",
                     fontSize: "16px",

@@ -2,6 +2,14 @@
 
 import { Box, Container, Stack } from "@mui/material";
 import Link from "next/link";
+import React from "react";
+
+const FOOTER_LINKS = [
+  { label: "Preise", href: "/preise" },
+  { label: "Datenschutz", href: "/datenschutz-agb" },
+  { label: "Impressum", href: "/impressum" },
+  { label: "Kontakt", href: "/kontakt" },
+];
 
 const MainFooter = () => {
   return (
@@ -16,11 +24,13 @@ const MainFooter = () => {
             sx={{ fontSize: "16px", fontWeight: 600, color: "#fff" }}
           >
             <Box>UniBonus | Alle Rechte vorbehalten.</Box>
-            <Stack direction={"row"} spacing={2}>
-              <Link href="/datenschutz-agb">Datenschutz</Link>
-              <Link href="/impressum">Impressum</Link>
-              <Link href="/preise">Preise</Link>
-              <Link href="/kontakt">Kontakt</Link>
+            <Stack direction={"row"} spacing={1.5} flexWrap="wrap" useFlexGap>
+              {FOOTER_LINKS.map((link, index) => (
+                <React.Fragment key={link.href}>
+                  {index > 0 && <Box component="span">|</Box>}
+                  <Link href={link.href}>{link.label}</Link>
+                </React.Fragment>
+              ))}
             </Stack>
           </Stack>
         </Container>
