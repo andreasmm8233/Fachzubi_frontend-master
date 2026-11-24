@@ -85,7 +85,7 @@ const Header = (props: Props) => {
           router.push("/");
         }}
       >
-        <Image alt="UniBonus" src={IMAGES.Logo} width={176} height={60} />
+        <Image alt="Azubi.App" src={IMAGES.Logo} width={176} height={62} />
       </Typography>
 
       <Divider />
@@ -191,7 +191,7 @@ const Header = (props: Props) => {
                 router.push("/");
               }}
             >
-              <Image alt="UniBonus" src={IMAGES.Logo} width={176} height={60} priority />
+              <Image alt="Azubi.App" src={IMAGES.Logo} width={176} height={62} priority />
             </Box>
             <Stack
               direction={"row"}
