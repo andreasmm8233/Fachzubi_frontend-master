@@ -23,7 +23,7 @@ const MainFooter = () => {
             justifyContent={{ xs: "flex-start", lg: "space-between" }}
             sx={{ fontSize: "16px", fontWeight: 600, color: "#fff" }}
           >
-            <Box>UniBonus | Alle Rechte vorbehalten.</Box>
+            <Box>Azubi.App | Alle Rechte vorbehalten.</Box>
             <Stack direction={"row"} spacing={1.5} flexWrap="wrap" useFlexGap>
               {FOOTER_LINKS.map((link, index) => (
                 <React.Fragment key={link.href}>
