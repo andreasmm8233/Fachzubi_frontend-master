@@ -222,7 +222,7 @@ export default function ContactPage() {
                 dangerouslySetInnerHTML={{
                   __html: text(
                     content.contactFormText,
-                    "UniBonus benötigt die Kontaktinformationen, die Sie uns zur Verfügung stellen, um Sie bezüglich Ihrer Anfrage zu kontaktieren. Weitere Informationen finden Sie in unseren Datenschutzbestimmungen."
+                    "Azubi.App benötigt die Kontaktinformationen, die Sie uns zur Verfügung stellen, um Sie bezüglich Ihrer Anfrage zu kontaktieren. Weitere Informationen finden Sie in unseren Datenschutzbestimmungen."
                   ),
                 }}
               />

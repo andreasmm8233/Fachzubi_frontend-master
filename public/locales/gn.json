@@ -2,15 +2,15 @@
     "my_data": "Meine Daten | STARTSEITE",
     "jobs": "Arbeitsplätze",
     "companies": "Firmen",
-    "unibonus_app": "unibonus.app",
+    "azubi_app": "azubi.app",
 },
 "Footer Keys (Page-/my-data)": {
-    "unibonus_all_rights_reserved": "Azubi.App | Alle Rechte vorbehalten.",
+    "azubi_app_all_rights_reserved": "Azubi.App | Alle Rechte vorbehalten.",
     "terms_conditions_privacy_policy": "Allgemeine Geschäftsbedingungen und Datenschutzbestimmungen",
 },
 "Home Page Front Content (Page-/my-data)": {
     "welcome": "WILLKOMMEN",
-    "home_heading": "Sichern Sie sich Ihren Traumjob bei UniBonus",
+    "home_heading": "Sichern Sie sich Ihren Traumjob bei Azubi.App",
     "home_descri": "Tauchen Sie ein in eine Welt voller beruflicher Möglichkeiten und spannender Karrieremöglichkeiten.
      Entdecken Sie renommierte Unternehmen aus Ihrer Region mit attraktiven Praktikums-, Studien-, Fachstellen- und Ausbildungsangeboten.
      Loslegen! 🚀",

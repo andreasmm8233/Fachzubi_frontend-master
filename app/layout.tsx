@@ -6,12 +6,12 @@ import Header from "@/components/header";
 import { Box } from "@mui/material";
 
 export const metadata: Metadata = {
-  title: "UniBonus",
+  title: "Azubi.App",
   description: "Clever informieren in deiner UniStadt!",
   openGraph: {
-    title: "UniBonus",
+    title: "Azubi.App",
     description: "Clever informieren in deiner UniStadt!",
-    siteName: "UniBonus",
+    siteName: "Azubi.App",
     type: "website",
   },
 };
